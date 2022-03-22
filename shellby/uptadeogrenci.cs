@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace shellby
 {
-    public partial class Form3 : Form
+    public partial class uptadeogrenci : Form
     {
         private Point lastPoint;
-        public Form3()
+        public uptadeogrenci()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace shellby
             if (panel3.Width >= 599)
             {
                 timer1.Stop();
-                Form fm3 = new Form2();
+                Form fm3 = new ogrencipanel();
                 fm3.Show();
                 this.Hide();
             }

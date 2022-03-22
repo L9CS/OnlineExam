@@ -2,40 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
+using System.IO;
 
 
 namespace shellby
 {
-    public partial class Form2 : Form
+    public partial class adminpanel : Form
     {
         private Point lastPoint;
-        public Form2()
+        public adminpanel()
         {
             InitializeComponent();
         }
+        public OleDbConnection bag = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=datam.accdb"); // databasenin yolunu bul ve bağlan
+        public DataTable tablo = new DataTable(); // databaseyi kontol et 
+        public OleDbDataAdapter adtr = new OleDbDataAdapter(); // bağlan
+        public OleDbCommand kmt = new OleDbCommand();
+        string DosyaYolu, DosyaAdi = "";
+        int id;
 
-
-        private void Form2_Shown (object sender, EventArgs e)
-        {
-
-        }
-        private void bunifuButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -44,7 +35,8 @@ namespace shellby
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+
+            timer1.Start(); // timer1 adlı fonksiyonu başlat 
 
         }
 
@@ -57,7 +49,7 @@ namespace shellby
         {
             if (e.Button == MouseButtons.Left)
             {
-                this.Left += e.X - lastPoint.X;
+                this.Left += e.X - lastPoint.X; // formu yönlendirme fonksiyonları 
                 this.Top += e.Y - lastPoint.Y;
             }
         }
@@ -106,20 +98,25 @@ namespace shellby
 
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void bunifuButton7_Click(object sender, EventArgs e)
         {
-            bunifuPages1.SetPage("Injector");
+            bunifuPages1.SetPage("tabPage1"); // butona basıldığında tabpage1 e yönlendir
         }
+
+        private void bunifuButton4_Click(object sender, EventArgs e)
+        {
+            bunifuPages1.SetPage("tabPage2");
+        }
+
+        private void bunifuButton3_Click(object sender, EventArgs e)
+        {
+            bunifuPages1.SetPage("tabPage3");
+        }
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            bunifuLabel1.Text = DateTime.Now.ToLongDateString();
-            bunifuLabel2.Text = DateTime.Now.ToLongTimeString();
+
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
@@ -127,21 +124,6 @@ namespace shellby
 
         }
 
-        private void bunifuButton9_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void bunifuIconButton5_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://eclipse.lol/");
-        }
-
-        private void bunifuIconButton4_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
-        }
 
         private void bunifuButton8_Click(object sender, EventArgs e)
         {
@@ -149,5 +131,40 @@ namespace shellby
         }
 
 
+
+
+
+
+
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnStokModelAra_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

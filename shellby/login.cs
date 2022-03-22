@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace shellby
 {
-    public partial class Form1 : Form
+    public partial class login : Form
     {
         private Point lastPoint;
 
-        public Form1()
+        public login()
         {
             InitializeComponent();
         }
@@ -24,12 +31,30 @@ namespace shellby
             this.Close();
             Application.Exit();
         }
-
+        OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=dbLogin.accdb");
+        OleDbCommand cmd;
+        OleDbDataReader dr;
         private void bunifuIconButton1_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3();
-            f3.ShowDialog();
-            this.Hide();
+            string ad = bunifuTextBox1.Text;
+            string parola = bunifuTextBox2.Text;
+            cmd = new OleDbCommand();
+            con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT * FROM Login where kullanici='" + ad + "' AND sifre='" + parola + "'";
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                ogrencicapcha f4 = new ogrencicapcha();
+                f4.ShowDialog();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Kullanıcı adı ya da şifre yanlış");
+            }
+
+            con.Close();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -90,6 +115,33 @@ namespace shellby
         private void bunifuIconButton4_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://t.me/Riot_Eclipse");
+        }
+
+        private void bunifuLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void bunifuIconButton3_Click_1(object sender, EventArgs e)
+        {
+            string ad = bunifuTextBox4.Text;
+            string parola = bunifuTextBox3.Text;
+            cmd = new OleDbCommand();
+            con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT * FROM LoginAdmin where kullanici='" + ad + "' AND sifre='" + parola + "'";
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                adminpanel f4 = new adminpanel();
+                f4.ShowDialog();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Kullanıcı adı ya da şifre yanlış");
+            }
+
+            con.Close();
         }
     }
 }
