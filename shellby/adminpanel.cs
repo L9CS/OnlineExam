@@ -20,7 +20,7 @@ namespace shellby
         {
             InitializeComponent();
         }
-        public OleDbConnection bag = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=datam.accdb"); // databasenin yolunu bul ve bağlan
+        public OleDbConnection bag = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=dbLogin.accdb"); // databasenin yolunu bul ve bağlan
         public DataTable tablo = new DataTable(); // databaseyi kontol et 
         public OleDbDataAdapter adtr = new OleDbDataAdapter(); // bağlan
         public OleDbCommand kmt = new OleDbCommand();
@@ -160,6 +160,40 @@ namespace shellby
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
 
+        }
+
+        private void bunifuButton5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (textBox1.Text.Trim() == "") errorProvider1.SetError(textBox1, "Boş geçilmez");
+                else errorProvider1.SetError(textBox1, "");
+                if (textBox2.Text.Trim() == "") errorProvider1.SetError(textBox2, "Boş geçilmez");
+                else errorProvider1.SetError(textBox2, "");
+
+                if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "")
+                {
+                    bag.Open();
+                    kmt.Connection = bag;
+                    kmt.CommandText = "INSERT INTO LoginAdmin(kullanici,sifre) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','"   "','" + textBox5.Text + "','" + DosyaAdi + "') ";
+                    kmt.ExecuteNonQuery();
+                    kmt.Dispose();
+                    bag.Close();
+                    for (int i = 0; i < this.Controls.Count; i++)
+                    {
+                        if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
+                    }
+                    listele();
+                    if (DosyaAdi != "") File.WriteAllBytes(DosyaAdi, File.ReadAllBytes(DosyaAc.FileName));
+                    MessageBox.Show("Kayıt İşlemi Tamamlandı ! ", "İşlem Sonucu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Kayıtlı Seri No !");
+                bag.Close();
+            }
         }
 
         private void tabPage1_Click_1(object sender, EventArgs e)
