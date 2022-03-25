@@ -35,7 +35,7 @@ namespace shellby
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            listele();
             timer1.Start(); // timer1 adlı fonksiyonu başlat 
 
         }
@@ -175,7 +175,7 @@ namespace shellby
                 {
                     bag.Open();
                     kmt.Connection = bag;
-                    kmt.CommandText = "INSERT INTO LoginAdmin(kullanici,sifre) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','"   "','" + textBox5.Text + "','" + DosyaAdi + "') ";
+                    kmt.CommandText = "INSERT INTO LoginAdmin(kullanici,sifre) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "',') ";
                     kmt.ExecuteNonQuery();
                     kmt.Dispose();
                     bag.Close();
@@ -184,8 +184,6 @@ namespace shellby
                         if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
                     }
                     listele();
-                    if (DosyaAdi != "") File.WriteAllBytes(DosyaAdi, File.ReadAllBytes(DosyaAc.FileName));
-                    MessageBox.Show("Kayıt İşlemi Tamamlandı ! ", "İşlem Sonucu", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
@@ -193,6 +191,32 @@ namespace shellby
             {
                 MessageBox.Show("Kayıtlı Seri No !");
                 bag.Close();
+            }
+        }
+
+        public void listele() // listele fonksyionu datagriende yazdırır ve güncellemeye yarar 
+        {
+            tablo.Clear(); // tabloyu temizle 
+            bag.Open(); // database bağlantısını sağla 
+            OleDbDataAdapter adtr = new OleDbDataAdapter("select kullanici, sifre From Login", bag); // database içinden verileri seç 
+            adtr.Fill(tablo); // verileri tabloya ekle 
+            bunifuDataGridView1.DataSource = tablo; // tablo 1 
+            adtr.Dispose(); // ekle 
+            bag.Close(); // kapat 
+            try // dene 
+            {
+                bunifuDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // herşeyi seç ve ekle 
+                //bunifuDataGridView1'deki tüm satırı seç              
+                bunifuDataGridView1.Columns[0].HeaderText = "Öğrenci Kullanıcı Adı";
+                //sütunlardaki textleri değiştirme
+                bunifuDataGridView1.Columns[1].HeaderText = "Öğrenci Şifresi";
+                bunifuDataGridView1.Columns[0].Width = 120;
+                //genişlik
+                bunifuDataGridView1.Columns[1].Width = 120;
+            }
+            catch
+            {
+                ;
             }
         }
 
