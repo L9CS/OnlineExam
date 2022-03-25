@@ -175,7 +175,7 @@ namespace shellby
                 {
                     bag.Open();
                     kmt.Connection = bag;
-                    kmt.CommandText = "INSERT INTO LoginAdmin(kullanici,sifre) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "',') ";
+                    kmt.CommandText = "INSERT INTO Login(kullanici,sifre) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "') ";
                     kmt.ExecuteNonQuery();
                     kmt.Dispose();
                     bag.Close();
@@ -184,12 +184,13 @@ namespace shellby
                         if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
                     }
                     listele();
+                    MessageBox.Show("Öğrenci Eklendi!");
                 }
 
             }
             catch
             {
-                MessageBox.Show("Kayıtlı Seri No !");
+                MessageBox.Show("Bir Hata Oluştu!");
                 bag.Close();
             }
         }
