@@ -975,3 +975,4 @@ C:\Users\hp\Documents\GitHub\OnlineExam\shellby\obj\Debug\shellby.csproj.CoreCom
 C:\Users\hp\Documents\GitHub\OnlineExam\shellby\obj\Debug\shellby.csproj.CopyComplete
 C:\Users\hp\Documents\GitHub\OnlineExam\shellby\obj\Debug\shellby.exe
 C:\Users\hp\Documents\GitHub\OnlineExam\shellby\obj\Debug\shellby.pdb
+C:\Users\hp\Documents\GitHub\OnlineExam\shellby\obj\Debug\shellby.adminuptade.resources

@@ -132,7 +132,7 @@ namespace shellby
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                adminpanel f4 = new adminpanel();
+                adminuptade f4 = new adminuptade();
                 f4.ShowDialog();
                 this.Hide();
             }
